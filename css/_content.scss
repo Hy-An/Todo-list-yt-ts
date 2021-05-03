@@ -1,0 +1,62 @@
+.content {
+  width: $box-width;
+  height: 350px;
+  max-height: 350px;
+  background-color: $white;
+  overflow: auto;
+
+  .content::-webkit-scrollbar {
+    display: none;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  .item {
+    width: $box-width;
+    height: 45px;
+    min-height: 45px;
+    position: relative;
+    border-bottom: 1px solid $border-shadow;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  i.co {
+    position: absolute;
+    font-size: 25px;
+    padding-left: 5px;
+    left: 15px;
+    top: 10px;
+  }
+  i.co:hover {
+    cursor: pointer;
+  }
+  .fa-check-circle {
+    color: $lime;
+  }
+  p.text {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    left: 50px;
+    top: 5px;
+    background-color: $white;
+    max-width: 285px;
+  }
+  .lineThrough {
+    text-decoration: line-through;
+    color: $line-trough;
+  }
+  i.de {
+    position: absolute;
+    font-size: 25px;
+    right: 15px;
+    top: 10px;
+  }
+  i.de:hover {
+    color: $red;
+    cursor: pointer;
+  }
+}
