@@ -5,7 +5,7 @@
   background-color: $white;
   overflow: auto;
 
-  .content::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
   ul {
@@ -28,10 +28,12 @@
     padding-left: 5px;
     left: 15px;
     top: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
-  i.co:hover {
-    cursor: pointer;
-  }
+
   .fa-check-circle {
     color: $lime;
   }
@@ -54,9 +56,10 @@
     font-size: 25px;
     right: 15px;
     top: 10px;
-  }
-  i.de:hover {
-    color: $red;
-    cursor: pointer;
+
+    &:hover {
+      color: $red;
+      cursor: pointer;
+    }
   }
 }
