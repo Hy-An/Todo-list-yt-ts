@@ -1,0 +1,35 @@
+.header {
+  width: 380px;
+  height: 200px;
+  background-image: url("../img/bg2.jpg");
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  border-radius: 15px 15px 0 0;
+  position: relative;
+
+  .clear {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    i {
+      font-size: 30px;
+      color: $white;
+      i:hover {
+        cursor: pointer;
+        text-shadow: 1px 3px 5px $black;
+        transform: rotate(45deg);
+      }
+    }
+    #date {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: $white;
+      font-size: 25px;
+      font-family: "Titillium Web", sans-serif;
+    }
+  }
+}

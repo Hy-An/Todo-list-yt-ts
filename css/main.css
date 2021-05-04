@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap");
+.header {
+  width: 380px;
+  height: 200px;
+  background-image: url("../img/bg2.jpg");
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  border-radius: 15px 15px 0 0;
+  position: relative;
+}
+
+.header .clear {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.header .clear i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.header .clear i:hover {
+  cursor: pointer;
+  text-shadow: 1px 3px 5px #000;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.header #date {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 25px;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.content {
+  width: 380px;
+  height: 350px;
+  max-height: 350px;
+  background-color: #fff;
+  overflow: auto;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.content ul {
+  padding: 0;
+  margin: 0;
+}
+
+.content .item {
+  width: 380px;
+  height: 45px;
+  min-height: 45px;
+  position: relative;
+  border-bottom: 1px solid #0000001a;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content i.co {
+  position: absolute;
+  font-size: 25px;
+  padding-left: 5px;
+  left: 15px;
+  top: 10px;
+}
+
+.content i.co:hover {
+  cursor: pointer;
+}
+
+.content .fa-check-circle {
+  color: #6eb200;
+}
+
+.content p.text {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  left: 50px;
+  top: 5px;
+  background-color: #fff;
+  max-width: 285px;
+}
+
+.content .lineThrough {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.content i.de {
+  position: absolute;
+  font-size: 25px;
+  right: 15px;
+  top: 10px;
+}
+
+.content i.de:hover {
+  color: #af0000;
+  cursor: pointer;
+}
+
+.add-to-do {
+  position: relative;
+  width: 360px;
+  height: 40px;
+  background-color: #fff;
+  padding: 10px;
+  border-top: 1px solid #0000001a;
+}
+
+.add-to-do i {
+  position: absolute;
+  font-size: 40px;
+  color: #4162f6;
+}
+
+.add-to-do input {
+  position: absolute;
+  left: 50px;
+  height: 35px;
+  width: 310px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #0000001a;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.container {
+  padding: 10px;
+  width: 380px;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=main.css.map */
