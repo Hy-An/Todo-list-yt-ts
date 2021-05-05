@@ -1,7 +1,9 @@
+import { TimeOptions } from "./interfaces.js";
+
 const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
-const input = document.getElementById("input");
+const input = document.getElementById("input") as HTMLInputElement;
 
 //Classes names
 const CHECK = "fa-check-circle";
@@ -9,7 +11,8 @@ const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
 //variables
-let LIST, id;
+let LIST: { name: string; id: number; done: boolean; trash: boolean }[],
+  id: number;
 
 let data = localStorage.getItem("TODO");
 
@@ -22,24 +25,35 @@ if (data) {
   id = 0;
 }
 
-function loadList(array) {
-  array.forEach(function (item) {
+function loadList(
+  array: { name: string; id: number; done: boolean; trash: boolean }[]
+) {
+  array.forEach(function (item: {
+    name: string;
+    id: number;
+    done: boolean;
+    trash: boolean;
+  }) {
     addToDo(item.name, item.id, item.done, item.trash);
   });
 }
 
-clear.addEventListener("click", function () {
+clear!.addEventListener("click", function () {
   localStorage.clear();
   location.reload();
 });
 
 //date
-const options = { weekday: "long", month: "short", day: "numeric" };
+const options: TimeOptions = {
+  weekday: "long",
+  month: "short",
+  day: "numeric",
+};
 const today = new Date();
 
-dateElement.innerHTML = today.toLocaleDateString("es-AR", options);
+dateElement!.innerHTML = today.toLocaleDateString("es-AR", options);
 
-function addToDo(toDo, id, done, trash) {
+function addToDo(toDo: string, id: number, done: boolean, trash: boolean) {
   if (trash) {
     return;
   }
@@ -54,7 +68,7 @@ function addToDo(toDo, id, done, trash) {
 
   const position = "beforeend";
 
-  list.insertAdjacentHTML(position, item);
+  list!.insertAdjacentHTML(position, item);
 }
 
 document.addEventListener("keyup", function (event) {
@@ -71,12 +85,29 @@ document.addEventListener("keyup", function (event) {
       });
       localStorage.setItem("TODO", JSON.stringify(LIST));
       id++;
+      console.log("anda");
     }
     input.value = "";
   }
 });
 
-function completeToDo(element) {
+function completeToDo(element: {
+  classList: { toggle: (arg0: string) => void };
+  parentNode: {
+    querySelector: (
+      arg0: string
+    ) => {
+      (): any;
+      new (): any;
+      classList: {
+        (): any;
+        new (): any;
+        toggle: { (arg0: string): void; new (): any };
+      };
+    };
+  };
+  id: string | number;
+}) {
   element.classList.toggle(CHECK);
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
@@ -84,14 +115,17 @@ function completeToDo(element) {
   LIST[element.id].done = LIST[element.id].done ? false : true;
 }
 
-function removeToDo(element) {
+function removeToDo(element: {
+  parentNode: { parentNode: { removeChild: (arg0: any) => void } };
+  id: string | number;
+}) {
   element.parentNode.parentNode.removeChild(element.parentNode);
 
   LIST[element.id].trash = true;
 }
 
-list.addEventListener("click", function (event) {
-  const element = event.target;
+list!.addEventListener("click", function (event) {
+  const element = event.target as any;
   const elementJob = element.attributes.job.value;
 
   if (elementJob == "complete") {
