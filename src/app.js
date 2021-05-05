@@ -1,16 +1,14 @@
-"use strict";
-exports.__esModule = true;
-var clear = document.querySelector(".clear");
-var dateElement = document.getElementById("date");
-var list = document.getElementById("list");
-var input = document.getElementById("input");
+const clear = document.querySelector(".clear");
+const dateElement = document.getElementById("date");
+const list = document.getElementById("list");
+const input = document.getElementById("input");
 //Classes names
-var CHECK = "fa-check-circle";
-var UNCHECK = "fa-circle-thin";
-var LINE_THROUGH = "lineThrough";
+const CHECK = "fa-check-circle";
+const UNCHECK = "fa-circle-thin";
+const LINE_THROUGH = "lineThrough";
 //variables
-var LIST, id;
-var data = localStorage.getItem("TODO");
+let LIST, id;
+let data = localStorage.getItem("TODO");
 if (data) {
     LIST = JSON.parse(data);
     id = LIST.length;
@@ -30,33 +28,37 @@ clear.addEventListener("click", function () {
     location.reload();
 });
 //date
-var options = {
+const options = {
     weekday: "long",
     month: "short",
-    day: "numeric"
+    day: "numeric",
 };
-var today = new Date();
+const today = new Date();
 dateElement.innerHTML = today.toLocaleDateString("es-AR", options);
 function addToDo(toDo, id, done, trash) {
     if (trash) {
         return;
     }
-    var DONE = done ? CHECK : UNCHECK;
-    var LINE = done ? LINE_THROUGH : "";
-    var item = " <li class=\"item\">\n  <i class=\"fa " + DONE + " co\" job=\"complete\" id=\"" + id + "\"></i>\n  <p class=\"text" + LINE + "\">" + toDo + "</p>\n  <i class=\"fa fa-trash-o de\" job=\"delete\" id=\"" + id + "\"></i>\n  </li>";
-    var position = "beforeend";
+    const DONE = done ? CHECK : UNCHECK;
+    const LINE = done ? LINE_THROUGH : "";
+    const item = ` <li class="item">
+  <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+  <p class="text${LINE}">${toDo}</p>
+  <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
+  </li>`;
+    const position = "beforeend";
     list.insertAdjacentHTML(position, item);
 }
 document.addEventListener("keyup", function (event) {
     if (event.keyCode == 13) {
-        var toDo = input.value;
+        const toDo = input.value;
         if (toDo) {
             addToDo(toDo, id, false, false);
             LIST.push({
                 name: toDo,
                 id: id,
                 done: false,
-                trash: false
+                trash: false,
             });
             localStorage.setItem("TODO", JSON.stringify(LIST));
             id++;
@@ -76,8 +78,8 @@ function removeToDo(element) {
     LIST[element.id].trash = true;
 }
 list.addEventListener("click", function (event) {
-    var element = event.target;
-    var elementJob = element.attributes.job.value;
+    const element = event.target;
+    const elementJob = element.attributes.job.value;
     if (elementJob == "complete") {
         completeToDo(element);
     }
@@ -86,3 +88,4 @@ list.addEventListener("click", function (event) {
     }
     localStorage.setItem("TODO", JSON.stringify(LIST));
 });
+export {};

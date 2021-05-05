@@ -1,4 +1,4 @@
-import { TimeOptions } from "./interfaces.js";
+import { ElementInterface, ListInterface, TimeOptions } from "./interfaces.js";
 
 const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
@@ -11,7 +11,7 @@ const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
 //variables
-let LIST: { name: string; id: number; done: boolean; trash: boolean }[],
+let LIST: ListInterface[],
   id: number;
 
 let data = localStorage.getItem("TODO");
@@ -91,23 +91,7 @@ document.addEventListener("keyup", function (event) {
   }
 });
 
-function completeToDo(element: {
-  classList: { toggle: (arg0: string) => void };
-  parentNode: {
-    querySelector: (
-      arg0: string
-    ) => {
-      (): any;
-      new (): any;
-      classList: {
-        (): any;
-        new (): any;
-        toggle: { (arg0: string): void; new (): any };
-      };
-    };
-  };
-  id: string | number;
-}) {
+function completeToDo(element: ElementInterface) {
   element.classList.toggle(CHECK);
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
@@ -115,10 +99,7 @@ function completeToDo(element: {
   LIST[element.id].done = LIST[element.id].done ? false : true;
 }
 
-function removeToDo(element: {
-  parentNode: { parentNode: { removeChild: (arg0: any) => void } };
-  id: string | number;
-}) {
+function removeToDo(element: ElementInterface) {
   element.parentNode.parentNode.removeChild(element.parentNode);
 
   LIST[element.id].trash = true;
