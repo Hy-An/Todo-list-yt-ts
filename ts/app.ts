@@ -11,8 +11,7 @@ const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
 //variables
-let LIST: ListInterface[],
-  id: number;
+let LIST: ListInterface[], id: number;
 
 let data = localStorage.getItem("TODO");
 
@@ -85,7 +84,6 @@ document.addEventListener("keyup", function (event) {
       });
       localStorage.setItem("TODO", JSON.stringify(LIST));
       id++;
-      console.log("anda");
     }
     input.value = "";
   }
