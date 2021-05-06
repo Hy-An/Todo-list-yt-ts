@@ -1,17 +1,19 @@
+import {
+  clear,
+  dateElement,
+  CHECK,
+  UNCHECK,
+  LINE_THROUGH,
+  list,
+  input,
+  option,
+  today,
+} from "./constants.js";
 import { ElementInterface, ListInterface, TimeOptions } from "./interfaces.js";
-
-const clear = document.querySelector(".clear");
-const dateElement = document.getElementById("date");
-const list = document.getElementById("list");
-const input = document.getElementById("input") as HTMLInputElement;
-
-//Classes names
-const CHECK = "fa-check-circle";
-const UNCHECK = "fa-circle-thin";
-const LINE_THROUGH = "lineThrough";
+import { clickEvent, addItem } from "./utils.js";
 
 //variables
-let LIST: ListInterface[], id: number;
+export let LIST: ListInterface[] = [], id: number= 0;
 
 let data = localStorage.getItem("TODO");
 
@@ -24,9 +26,7 @@ if (data) {
   id = 0;
 }
 
-function loadList(
-  array: { name: string; id: number; done: boolean; trash: boolean }[]
-) {
+function loadList(array: ListInterface[]) {
   array.forEach(function (item: {
     name: string;
     id: number;
@@ -43,16 +43,10 @@ clear!.addEventListener("click", function () {
 });
 
 //date
-const options: TimeOptions = {
-  weekday: "long",
-  month: "short",
-  day: "numeric",
-};
-const today = new Date();
 
-dateElement!.innerHTML = today.toLocaleDateString("es-AR", options);
+dateElement!.innerHTML = today.toLocaleDateString("es-AR", option);
 
-function addToDo(toDo: string, id: number, done: boolean, trash: boolean) {
+export function addToDo(toDo: string, id: number, done: boolean, trash: boolean) {
   if (trash) {
     return;
   }
@@ -70,26 +64,7 @@ function addToDo(toDo: string, id: number, done: boolean, trash: boolean) {
   list!.insertAdjacentHTML(position, item);
 }
 
-document.addEventListener("keyup", function (event) {
-  if (event.keyCode == 13) {
-    const toDo = input.value;
-    if (toDo) {
-      addToDo(toDo, id, false, false);
-
-      LIST.push({
-        name: toDo,
-        id: id,
-        done: false,
-        trash: false,
-      });
-      localStorage.setItem("TODO", JSON.stringify(LIST));
-      id++;
-    }
-    input.value = "";
-  }
-});
-
-function completeToDo(element: ElementInterface) {
+export function completeToDo(element: ElementInterface) {
   element.classList.toggle(CHECK);
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
@@ -97,20 +72,12 @@ function completeToDo(element: ElementInterface) {
   LIST[element.id].done = LIST[element.id].done ? false : true;
 }
 
-function removeToDo(element: ElementInterface) {
+export function removeToDo(element: ElementInterface) {
   element.parentNode.parentNode.removeChild(element.parentNode);
 
   LIST[element.id].trash = true;
 }
 
-list!.addEventListener("click", function (event) {
-  const element = event.target as any;
-  const elementJob = element.attributes.job.value;
-
-  if (elementJob == "complete") {
-    completeToDo(element);
-  } else if (elementJob == "delete") {
-    removeToDo(element);
-  }
-  localStorage.setItem("TODO", JSON.stringify(LIST));
-});
+//Event Listener
+list!.addEventListener("click", (event) => clickEvent(event));
+document.addEventListener("keyup", (event) => addItem(event,id));

@@ -1,13 +1,7 @@
-const clear = document.querySelector(".clear");
-const dateElement = document.getElementById("date");
-const list = document.getElementById("list");
-const input = document.getElementById("input");
-//Classes names
-const CHECK = "fa-check-circle";
-const UNCHECK = "fa-circle-thin";
-const LINE_THROUGH = "lineThrough";
+import { clear, dateElement, CHECK, UNCHECK, LINE_THROUGH, list, option, today, } from "./constants.js";
+import { clickEvent, addItem } from "./utils.js";
 //variables
-let LIST, id;
+export let LIST = [], id = 0;
 let data = localStorage.getItem("TODO");
 if (data) {
     LIST = JSON.parse(data);
@@ -28,14 +22,8 @@ clear.addEventListener("click", function () {
     location.reload();
 });
 //date
-const options = {
-    weekday: "long",
-    month: "short",
-    day: "numeric",
-};
-const today = new Date();
-dateElement.innerHTML = today.toLocaleDateString("es-AR", options);
-function addToDo(toDo, id, done, trash) {
+dateElement.innerHTML = today.toLocaleDateString("es-AR", option);
+export function addToDo(toDo, id, done, trash) {
     if (trash) {
         return;
     }
@@ -49,43 +37,16 @@ function addToDo(toDo, id, done, trash) {
     const position = "beforeend";
     list.insertAdjacentHTML(position, item);
 }
-document.addEventListener("keyup", function (event) {
-    if (event.keyCode == 13) {
-        const toDo = input.value;
-        if (toDo) {
-            addToDo(toDo, id, false, false);
-            LIST.push({
-                name: toDo,
-                id: id,
-                done: false,
-                trash: false,
-            });
-            localStorage.setItem("TODO", JSON.stringify(LIST));
-            id++;
-            console.log("anda");
-        }
-        input.value = "";
-    }
-});
-function completeToDo(element) {
+export function completeToDo(element) {
     element.classList.toggle(CHECK);
     element.classList.toggle(UNCHECK);
     element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
     LIST[element.id].done = LIST[element.id].done ? false : true;
 }
-function removeToDo(element) {
+export function removeToDo(element) {
     element.parentNode.parentNode.removeChild(element.parentNode);
     LIST[element.id].trash = true;
 }
-list.addEventListener("click", function (event) {
-    const element = event.target;
-    const elementJob = element.attributes.job.value;
-    if (elementJob == "complete") {
-        completeToDo(element);
-    }
-    else if (elementJob == "delete") {
-        removeToDo(element);
-    }
-    localStorage.setItem("TODO", JSON.stringify(LIST));
-});
-export {};
+//Event Listener
+list.addEventListener("click", (event) => clickEvent(event));
+document.addEventListener("keyup", (event) => addItem(event, id));
