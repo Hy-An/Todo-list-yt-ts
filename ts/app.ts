@@ -12,12 +12,10 @@ import {
 import { ElementInterface, ListInterface, TimeOptions } from "./interfaces.js";
 import { clickEvent, addItem, clearLocalStorage } from "./utils.js";
 
-//variables
 export let LIST: ListInterface[] = [],
   id: number = 0;
 
 let data = localStorage.getItem("TODO");
-
 if (data) {
   LIST = JSON.parse(data);
   id = LIST.length;
@@ -59,9 +57,7 @@ export function addToDo(
   <p class="text${LINE}">${toDo}</p>
   <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
   </li>`;
-
   const position = "beforeend";
-
   list!.insertAdjacentHTML(position, item);
 }
 
@@ -69,13 +65,11 @@ export function completeToDo(element: ElementInterface) {
   element.classList.toggle(CHECK);
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
-
   LIST[element.id].done = LIST[element.id].done ? false : true;
 }
 
 export function removeToDo(element: ElementInterface) {
   element.parentNode.parentNode.removeChild(element.parentNode);
-
   LIST[element.id].trash = true;
 }
 

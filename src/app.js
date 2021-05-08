@@ -1,6 +1,5 @@
 import { clear, dateElement, CHECK, UNCHECK, LINE_THROUGH, list, option, today, } from "./constants.js";
 import { clickEvent, addItem, clearLocalStorage } from "./utils.js";
-//variables
 export let LIST = [], id = 0;
 let data = localStorage.getItem("TODO");
 if (data) {

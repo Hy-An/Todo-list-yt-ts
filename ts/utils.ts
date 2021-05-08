@@ -23,7 +23,6 @@ export function addItem(event: KeyboardEvent, id: number) {
 export function clickEvent(event: MouseEvent) {
   const element = event.target as any;
   const elementJob = element.attributes.job.value;
-
   if (elementJob == "complete") {
     completeToDo(element);
   } else if (elementJob == "delete") {
