@@ -1,5 +1,5 @@
 import { clear, dateElement, CHECK, UNCHECK, LINE_THROUGH, list, option, today, } from "./constants.js";
-import { clickEvent, addItem } from "./utils.js";
+import { clickEvent, addItem, clearLocalStorage } from "./utils.js";
 //variables
 export let LIST = [], id = 0;
 let data = localStorage.getItem("TODO");
@@ -17,10 +17,6 @@ function loadList(array) {
         addToDo(item.name, item.id, item.done, item.trash);
     });
 }
-clear.addEventListener("click", function () {
-    localStorage.clear();
-    location.reload();
-});
 //date
 dateElement.innerHTML = today.toLocaleDateString("es-AR", option);
 export function addToDo(toDo, id, done, trash) {
@@ -50,3 +46,4 @@ export function removeToDo(element) {
 //Event Listener
 list.addEventListener("click", (event) => clickEvent(event));
 document.addEventListener("keyup", (event) => addItem(event, id));
+clear.addEventListener("click", clearLocalStorage);

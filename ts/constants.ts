@@ -1,4 +1,4 @@
-import { TimeOptions } from "./interfaces";
+import { TimeOptions } from "./interfaces.js";
 
 export const clear = document.querySelector(".clear");
 export const dateElement = document.getElementById("date");

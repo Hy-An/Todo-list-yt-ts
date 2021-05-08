@@ -10,10 +10,11 @@ import {
   today,
 } from "./constants.js";
 import { ElementInterface, ListInterface, TimeOptions } from "./interfaces.js";
-import { clickEvent, addItem } from "./utils.js";
+import { clickEvent, addItem, clearLocalStorage } from "./utils.js";
 
 //variables
-export let LIST: ListInterface[] = [], id: number= 0;
+export let LIST: ListInterface[] = [],
+  id: number = 0;
 
 let data = localStorage.getItem("TODO");
 
@@ -37,16 +38,16 @@ function loadList(array: ListInterface[]) {
   });
 }
 
-clear!.addEventListener("click", function () {
-  localStorage.clear();
-  location.reload();
-});
-
 //date
 
 dateElement!.innerHTML = today.toLocaleDateString("es-AR", option);
 
-export function addToDo(toDo: string, id: number, done: boolean, trash: boolean) {
+export function addToDo(
+  toDo: string,
+  id: number,
+  done: boolean,
+  trash: boolean
+) {
   if (trash) {
     return;
   }
@@ -80,4 +81,5 @@ export function removeToDo(element: ElementInterface) {
 
 //Event Listener
 list!.addEventListener("click", (event) => clickEvent(event));
-document.addEventListener("keyup", (event) => addItem(event,id));
+document.addEventListener("keyup", (event) => addItem(event, id));
+clear!.addEventListener("click", clearLocalStorage);

@@ -1,7 +1,7 @@
 import { addToDo, completeToDo, LIST, removeToDo } from "./app.js";
 import { input } from "./constants.js";
 
-export function addItem(event: KeyboardEvent,id:number) {
+export function addItem(event: KeyboardEvent, id: number) {
   if (event.keyCode == 13) {
     const toDo = input.value;
     if (toDo) {
@@ -30,4 +30,9 @@ export function clickEvent(event: MouseEvent) {
     removeToDo(element);
   }
   localStorage.setItem("TODO", JSON.stringify(LIST));
+}
+
+export function clearLocalStorage() {
+  localStorage.clear();
+  location.reload();
 }

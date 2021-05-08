@@ -28,3 +28,7 @@ export function clickEvent(event) {
     }
     localStorage.setItem("TODO", JSON.stringify(LIST));
 }
+export function clearLocalStorage() {
+    localStorage.clear();
+    location.reload();
+}
